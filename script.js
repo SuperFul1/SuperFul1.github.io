@@ -17,34 +17,41 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Фильтрация работ по курсам
+// Обработка кнопок-ссылок (без фильтрации, только визуальный эффект)
 const filterButtons = document.querySelectorAll('.filter-btn');
-const worksGrid = document.querySelector('.works-grid');
 
 filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Убираем активный класс у всех кнопок
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Добавляем активный класс нажатой кнопке
-        button.classList.add('active');
-        
-        const filterValue = button.getAttribute('data-filter');
-        
-        // Обновляем текст в зависимости от выбранного курса
-        const emptyWorks = worksGrid.querySelector('.empty-works');
-        if (filterValue === 'all') {
-            emptyWorks.querySelector('h3').textContent = 'Работы пока не добавлены';
-            emptyWorks.querySelector('p').textContent = 'В этом разделе будут отображаться ваши проекты после их добавления.';
-        } else {
-            emptyWorks.querySelector('h3').textContent = `Работы за ${filterValue} курс`;
-            emptyWorks.querySelector('p').textContent = `Здесь будут отображаться ваши проекты, выполненные в течение ${filterValue} курса.`;
+    button.addEventListener('click', (e) => {
+        // Если это не ссылка на внешний ресурс (начинается с #)
+        if (button.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            
+            // Убираем активный класс у всех кнопок
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем активный класс нажатой кнопке
+            button.classList.add('active');
+            
+            // Обновляем текст в блоке работ
+            const emptyWorks = document.querySelector('.empty-works');
+            const buttonText = button.textContent.trim();
+            
+            if (buttonText === 'Все работы') {
+                emptyWorks.querySelector('h3').textContent = 'Работы пока не добавлены на сайт';
+                emptyWorks.querySelector('p').textContent = 'Мои работы распределены по курсам. Нажмите на кнопку соответствующего курса выше, чтобы перейти к просмотру работ.';
+            } else if (buttonText.includes('курс')) {
+                const courseNum = buttonText.charAt(0);
+                emptyWorks.querySelector('h3').textContent = `Работы за ${courseNum} курс`;
+                emptyWorks.querySelector('p').textContent = `Нажмите на кнопку "${buttonText}" выше еще раз, чтобы перейти на страницу с работами за ${courseNum} курс.`;
+            }
+            
+            // Эффект при нажатии
+            button.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                button.style.transform = 'translateY(-3px)';
+            }, 200);
         }
-        
-        // Можно добавить анимацию или другие эффекты при переключении
-        emptyWorks.style.opacity = '0.7';
-        setTimeout(() => {
-            emptyWorks.style.opacity = '1';
-        }, 200);
+        // Если это внешняя ссылка, она откроется в новой вкладке (target="_blank")
+        // и никаких дополнительных действий не требуется
     });
 });
 
@@ -70,8 +77,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 50) {
-        header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+        header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
     } else {
-        header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
-    }
-});
+        header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.
