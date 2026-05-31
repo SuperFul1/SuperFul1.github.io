@@ -6,7 +6,6 @@
     <title>Портфолио студента | Артём</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Базовые стили */
         :root {
             --primary-color: #4a6fa5;
             --secondary-color: #166088;
@@ -307,7 +306,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 15px;
-            margin: 40px 0 50px;
+            margin: 40px 0 20px;
             position: relative;
             z-index: 2;
         }
@@ -324,9 +323,11 @@
             text-decoration: none;
             display: inline-block;
             backdrop-filter: blur(5px);
+            font-size: 1rem;
+            font-family: inherit;
         }
         
-        .filter-btn:hover, .filter-btn.active {
+        .filter-btn:hover {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
@@ -334,7 +335,68 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
-        /* Подвал - Коллады */
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Панель с дисциплинами */
+        .disciplines-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, margin 0.3s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid transparent;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        
+        .disciplines-panel.open {
+            max-height: 800px; /* достаточно для любого количества дисциплин */
+            margin-top: 25px;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-color: rgba(226, 232, 240, 0.6);
+        }
+        
+        .disciplines-inner {
+            display: none;
+        }
+        
+        .disciplines-inner.active {
+            display: block;
+        }
+        
+        .discipline-link {
+            display: block;
+            padding: 12px 18px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            border: 1px solid #e9eef3;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            text-align: left;
+        }
+        
+        .discipline-link:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateX(6px);
+        }
+        
+        /* Подвал */
         footer {
             background-color: var(--dark-color);
             color: white;
@@ -486,7 +548,6 @@
     </style>
 </head>
 <body>
-    <!-- Шапка с навигацией -->
     <header>
         <div class="container">
             <nav>
@@ -506,7 +567,6 @@
         </div>
     </header>
 
-    <!-- Главная секция -->
     <section class="hero" id="home">
         <div class="container">
             <h1>Артём</h1>
@@ -515,14 +575,13 @@
         </div>
     </section>
 
-    <!-- Раздел "Обо мне" -->
     <section id="about">
         <div class="container">
             <h2>Обо мне</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>Меня зовут Артём, я студент 4 курса РГПУ им. Герцена по специальности ИВТ.</p>
-                    <p>Во время обучения я осваиваю различные дисциплины, участвую в учебных проектах и развиваюсь в области  веб-разработки.</p>
+                    <p>Во время обучения я осваиваю различные дисциплины, участвую в учебных проектах и развиваюсь в области веб-разработки.</p>
                     <p>Моя цель — применить полученные знания на практике и стать востребованным специалистом в своей области.</p>
                     
                     <h3 style="margin-top: 25px;">Мои навыки</h3>
@@ -537,25 +596,64 @@
         </div>
     </section>
 
-    <!-- Раздел "Результаты работ" -->
     <section id="works" class="works-section">
         <div class="container">
             <h2>Результаты работ</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Нажмите на кнопку соответствующего курса, чтобы перейти к просмотру работ за этот период обучения.</p>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Нажмите на кнопку курса, чтобы увидеть список дисциплин. Затем выберите нужную дисциплину для перехода к материалам.</p>
             
-            <!-- Кнопки фильтрации -->
             <div class="filter-buttons">
-                <!-- Замените # на ваши реальные ссылки -->
-                <a href="https://github.com/SuperFul1/Herzen-tihonov-all-tasks/tree/main/1%20%D0%BA%D1%83%D1%80%D1%81" target="_blank" class="filter-btn">1 курс</a>
-                <a href="https://github.com/SuperFul1/Herzen-tihonov-all-tasks/tree/main/2%20%D0%BA%D1%83%D1%80%D1%81" target="_blank" class="filter-btn">2 курс</a>
-                <a href="https://github.com/SuperFul1/Herzen-tihonov-all-tasks/tree/main/3%20%D0%BA%D1%83%D1%80%D1%81" target="_blank" class="filter-btn">3 курс</a>
-                <a href="https://github.com/SuperFul1/Herzen-tihonov-all-tasks/tree/main/4%20%D0%BA%D1%83%D1%80%D1%81" target="_blank" class="filter-btn">4 курс</a>
+                <button class="filter-btn course-btn" data-course="1">1 курс</button>
+                <button class="filter-btn course-btn" data-course="2">2 курс</button>
+                <button class="filter-btn course-btn" data-course="3">3 курс</button>
+                <button class="filter-btn course-btn" data-course="4">4 курс</button>
             </div>
-            
+
+            <!-- Выпадающая панель с дисциплинами -->
+            <div class="disciplines-panel" id="disciplines-panel">
+                <div class="disciplines-inner" id="list-1">
+                    <a href="https://github.com" class="discipline-link" target="_blank">Английский язык</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Информационные технологии</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Основы компьютерной алгебры</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Безопасность жизнедеятельности</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Информатика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">ИТ в физике</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Курсовая</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Математика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Практика</a>
+                </div>
+                <div class="disciplines-inner" id="list-2">
+                    <a href="https://github.com" class="discipline-link" target="_blank">Операционные системы</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Английский</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Анализ данных</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Выч. мат.</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Вычислительная техника</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Интегралы</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Курсовая</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Практика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Операционные системы</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Английский язык</a>
+                </div>
+                <div class="disciplines-inner" id="list-3">
+                    <a href="https://github.com" class="discipline-link" target="_blank">Английский</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Компьютерная графика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Курсовая работа</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">ПИТ</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Практика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Программирование</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Сети</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Техники и технологии визуализации</a>
+                </div>
+                <div class="disciplines-inner" id="list-4">
+                    <a href="https://github.com" class="discipline-link" target="_blank">Языки написания спецификаций</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">ИТ рекрутмент</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Информационные технологии оценки персонала</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Практика</a>
+                    <a href="https://github.com" class="discipline-link" target="_blank">Социальные и профессиональные вопросы информатики и ИТ</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Подвал - Коллады -->
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
@@ -593,7 +691,7 @@
             });
         }
         
-        // Закрытие меню при клике на ссылку
+        // Закрытие мобильного меню при клике на ссылку
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 if (navLinks.classList.contains('active')) {
@@ -622,7 +720,7 @@
             });
         });
         
-        // Добавляем тень к header при прокрутке
+        // Тень хедера при прокрутке
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (header) {
@@ -634,16 +732,48 @@
             }
         });
         
-        // Эффект при наведении на кнопки курсов
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.05)';
+        // === Логика работы кнопок курсов и панели дисциплин ===
+        (function() {
+            const courseButtons = document.querySelectorAll('.course-btn');
+            const panel = document.getElementById('disciplines-panel');
+            const innerLists = document.querySelectorAll('.disciplines-inner');
+            
+            function closePanel() {
+                panel.classList.remove('open');
+                courseButtons.forEach(btn => btn.classList.remove('active'));
+                innerLists.forEach(list => list.classList.remove('active'));
+            }
+            
+            courseButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const course = this.getAttribute('data-course');
+                    const targetList = document.getElementById('list-' + course);
+                    if (!targetList) return;
+                    
+                    // Если эта же кнопка уже активна – закрываем панель
+                    if (this.classList.contains('active')) {
+                        closePanel();
+                        return;
+                    }
+                    
+                    // Сначала закрываем всё
+                    closePanel();
+                    
+                    // Затем открываем нужный список
+                    targetList.classList.add('active');
+                    panel.classList.add('open');
+                    this.classList.add('active');
+                });
             });
             
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+            // Закрытие при клике вне панели и кнопок
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.course-btn') && !e.target.closest('#disciplines-panel')) {
+                    closePanel();
+                }
             });
-        });
+        })();
     </script>
 </body>
 </html>
